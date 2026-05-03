@@ -19,7 +19,12 @@ export class SequencePlayer {
     async init() {
         this.handleResize();
         window.addEventListener('resize', () => this.handleResize());
-        await this.preloadImages();
+        
+        // Start loading images, but don't wait for all of them
+        this.preloadImages();
+        
+        // Wait for a buffer of frames to be ready before starting animation
+        await this.waitForBuffer(30);
         this.animate(0);
     }
 
@@ -32,28 +37,48 @@ export class SequencePlayer {
     }
 
     async preloadImages() {
-        const loadPromises = [];
         for (let i = 0; i < this.frameCount; i++) {
             const path = this.pathTemplate(i);
             const img = new Image();
             img.src = path;
-            const promise = new Promise((resolve) => {
-                img.onload = resolve;
-                img.onerror = resolve; // Skip failed images
+            
+            this.images.push({
+                img: img,
+                loaded: false
             });
-            loadPromises.push(promise);
-            this.images.push(img);
-        }
 
-        await Promise.all(loadPromises);
-        this.isLoaded = true;
-        console.log('All frames loaded');
+            img.onload = () => {
+                this.images[i].loaded = true;
+                if (i === this.frameCount - 1) {
+                    this.isLoaded = true;
+                    console.log('All frames loaded');
+                }
+            };
+            img.onerror = () => {
+                this.images[i].loaded = true; // Mark as done even if error to avoid blocking
+            };
+        }
+    }
+
+    async waitForBuffer(count) {
+        return new Promise((resolve) => {
+            const check = () => {
+                const loadedCount = this.images.filter(img => img.loaded).length;
+                if (loadedCount >= count) {
+                    resolve();
+                } else {
+                    setTimeout(check, 100);
+                }
+            };
+            check();
+        });
     }
 
     renderFrame(index) {
-        if (!this.images[index]) return;
+        const frame = this.images[index];
+        if (!frame || !frame.loaded) return;
         
-        const img = this.images[index];
+        const img = frame.img;
         const canvasAspect = this.canvas.width / this.canvas.height;
         const imgAspect = img.width / img.height;
 
