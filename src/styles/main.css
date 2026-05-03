@@ -538,9 +538,18 @@
 
         .menu-card h3 {
             font-size: 1.8rem;
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
+            margin-bottom: 0.5rem;
+            color: var(--saffron);
+            font-family: var(--font-display);
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .odia {
+            font-size: 1.1rem;
+            opacity: 0.7;
+            font-weight: 400;
         }
 
         .menu-card h3::after {
