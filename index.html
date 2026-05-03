@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aahar | Authentic Indian Cuisine</title>
+    <meta name="description" content="Experience the authentic flavors of Odisha at Aahar. Homestyle Indian cooking since 2009.">
+    <meta name="theme-color" content="#1A1208">
+    <meta property="og:title" content="Aahar | Authentic Indian Cuisine">
+    <meta property="og:description" content="Homestyle cooking from the heart of Bhubaneswar. Experience the soul of Odisha.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,600&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Three.js CDN -->
+    
+
+
+
+
+    
+    <!-- Grain Texture Filter -->
+    <svg style="display:none;">
+        <filter id="grainy">
+            <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+            <feColorMatrix type="saturate" values="0"/>
+        </filter>
+    </svg>
+</head>
+<body>
+
+    <!-- CUSTOM CURSOR -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+
+
+
+    <!-- NAVIGATION -->
+    <nav id="navbar">
+        <div class="logo">Aahar</div>
+        <div class="nav-links">
+            <a href="#menu" class="hover-target">Menu</a>
+            <a href="#about" class="hover-target">About</a>
+            <a href="#testimonials" class="hover-target">Reviews</a>
+            <a href="#location" class="hover-target">Find Us</a>
+            <a href="#reservation" class="btn-reserve hover-target">Reserve</a>
+        </div>
+        <button class="hamburger" id="hamburgerBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <div class="nav-overlay" id="navOverlay">
+        <a href="#menu" class="hover-target">Menu</a>
+        <a href="#about" class="hover-target">About</a>
+        <a href="#testimonials" class="hover-target">Reviews</a>
+        <a href="#location" class="hover-target">Find Us</a>
+        <a href="#reservation" class="hover-target">Reserve</a>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section id="hero">
+        <canvas id="hero-canvas"></canvas>
+        <canvas id="sequence-canvas"></canvas>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="eyebrow reveal">Authentic Odisha</span>
+            <h1 class="reveal">Where Every Dish <br><span>Tells a Story</span></h1>
+            <p class="hero-desc reveal">Experience the soul of Bhubaneswar through hand-crafted recipes, vibrant spices, and a legacy of homestyle cooking since 2009.</p>
+            <div class="hero-btns reveal">
+                <a href="#reservation" class="btn-reserve hover-target">Reserve a Table</a>
+                <a href="#menu" class="btn-outline hover-target">View Menu</a>
+            </div>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee" onmouseenter="this.style.animationPlayState='paused'" onmouseleave="this.style.animationPlayState='running'">
+        <div class="marquee-content">
+            Homestyle Cooking &nbsp;·&nbsp; Est. 2009 &nbsp;·&nbsp; Bhubaneswar, Odisha &nbsp;·&nbsp; Open Daily 11am–10pm &nbsp;·&nbsp; Pure Veg & Non-Veg &nbsp;·&nbsp; ★ 4.8 Rated &nbsp;·&nbsp;
+            Homestyle Cooking &nbsp;·&nbsp; Est. 2009 &nbsp;·&nbsp; Bhubaneswar, Odisha &nbsp;·&nbsp; Open Daily 11am–10pm &nbsp;·&nbsp; Pure Veg & Non-Veg &nbsp;·&nbsp; ★ 4.8 Rated &nbsp;·&nbsp;
+        </div>
+    </div>
+
+    <!-- ABOUT SECTION -->
+    <section id="about">
+        <div class="grid-2">
+            <div class="about-visual reveal">
+                <img src="/images/about-thali.png" alt="Aahar Heritage Thali" class="about-thali-img">
+            </div>
+            <div class="about-text reveal">
+                <h2>Our Culinary Heritage</h2>
+                <p>Born in the heart of Bhubaneswar, Aahar began with a simple mission: to bring the warmth of a mother's kitchen to the city. Every spice is hand-pounded, and every recipe is a family secret passed down through generations. We believe that food isn't just sustenance—it's a celebration of culture and community.</p>
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <span>15+</span>
+                        <p>Years</p>
+                    </div>
+                    <div class="stat-item">
+                        <span>4.8★</span>
+                        <p>Rating</p>
+                    </div>
+                    <div class="stat-item">
+                        <span>200+</span>
+                        <p>Dishes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENU SECTION -->
+    <section id="menu">
+        <div class="section-header reveal">
+            <h2>What we're cooking today</h2>
+            <p>Everything we make is traditional and prepared fresh to your order.</p>
+        </div>
+        
+        <div class="tab-filters reveal">
+            <button class="tab-btn active" onclick="filterMenu('all')">All</button>
+            <button class="tab-btn" onclick="filterMenu('starters')">Starters</button>
+            <button class="tab-btn" onclick="filterMenu('mains')">Mains</button>
+            <button class="tab-btn" onclick="filterMenu('breads')">Breads</button>
+            <button class="tab-btn" onclick="filterMenu('desserts')">Desserts</button>
+        </div>
+
+        <div class="menu-grid reveal" id="menu-grid">
+            <!-- Mains -->
+            <div class="menu-card" data-category="mains">
+                <div class="menu-img-wrapper">
+                    <img src="/images/menu/dalma.png" alt="Dalma Special">
+                </div>
+                <div class="menu-info">
+                    <h3>Dalma Special</h3>
+                    <p>Odisha's signature lentil dish with roasted vegetables and tempered spices.</p>
+                    <div class="card-footer">
+                        <span class="price">₹180</span>
+                        <span class="tag">Pure Veg</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card" data-category="mains">
+                <div class="menu-img-wrapper">
+                    <img src="/images/menu/mutton.png" alt="Dhenkanal Mutton">
+                </div>
+                <div class="menu-info">
+                    <h3>Dhenkanal Mutton</h3>
+                    <p>Slow-cooked tender mutton in a rich, dark terracotta-colored gravy.</p>
+                    <div class="card-footer">
+                        <span class="price">₹450</span>
+                        <span class="tag spicy">Spicy</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card" data-category="mains">
+                <div class="menu-img-wrapper">
+                    <img src="/images/menu/chhena.png" alt="Chhena Besara">
+                </div>
+                <div class="menu-info">
+                    <h3>Chhena Besara</h3>
+                    <p>Cottage cheese cubes in a pungent mustard gravy with traditional spices.</p>
+                    <div class="card-footer">
+                        <span class="price">₹320</span>
+                        <span class="tag">Pure Veg</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Starters -->
+            <div class="menu-card" data-category="starters">
+                <div class="menu-img-wrapper">
+                    <img src="/images/menu/samosa.png" alt="Vegetable Samosa">
+                </div>
+                <div class="menu-info">
+                    <h3>Vegetable Samosa</h3>
+                    <p>Hand-folded pastry filled with spiced potatoes and local green peas.</p>
+                    <div class="card-footer">
+                        <span class="price">₹60</span>
+                        <span class="tag">Pure Veg</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card" data-category="starters">
+                <div class="menu-img-wrapper">
+                    <img src="/images/menu/gupchup.png" alt="Gupchup Platter">
+                </div>
+                <div class="menu-info">
+                    <h3>Gupchup Platter</h3>
+                    <p>Crispy hollow puris served with spicy tamarind water and mashed yellow peas.</p>
+                    <div class="card-footer">
+                        <span class="price">₹120</span>
+                        <span class="tag spicy">Spicy</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card" data-category="starters">
+                <div class="menu-img-wrapper">
+                    <img src="/images/menu/prawns.png" alt="Chilika Prawns">
+                </div>
+                <div class="menu-info">
+                    <h3>Chilika Prawns</h3>
+                    <p>Crispy fried prawns from the Chilika lake, marinated in local spices.</p>
+                    <div class="card-footer">
+                        <span class="price">₹480</span>
+                        <span class="tag">Non-Veg</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Breads -->
+            <div class="menu-card" data-category="breads">
+                <div class="menu-img-wrapper">
+                    <img src="/images/menu/chakuli-pitha.png" alt="Chakuli Pitha">
+                </div>
+                <div class="menu-info">
+                    <h3>Chakuli Pitha</h3>
+                    <p>Traditional fermented rice and lentil pancakes, thin and crisp.</p>
+                    <div class="card-footer">
+                        <span class="price">₹80</span>
+                        <span class="tag">Pure Veg</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card" data-category="breads">
+                <div class="menu-img-wrapper">
+                    <img src="/images/menu/bara-ghuguni.png" alt="Bara Ghuguni">
+                </div>
+                <div class="menu-info">
+                    <h3>Bara Ghuguni</h3>
+                    <p>Deep-fried lentil donuts served with spicy yellow pea curry.</p>
+                    <div class="card-footer">
+                        <span class="price">₹90</span>
+                        <span class="tag">Pure Veg</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card" data-category="breads">
+                <div class="menu-img-wrapper">
+                    <img src="/images/menu/atta-paratha.png" alt="Atta Paratha">
+                </div>
+                <div class="menu-info">
+                    <h3>Atta Paratha</h3>
+                    <p>Layered whole wheat bread, pan-fried with a touch of ghee.</p>
+                    <div class="card-footer">
+                        <span class="price">₹40</span>
+                        <span class="tag">Pure Veg</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Desserts -->
+            <div class="menu-card" data-category="desserts">
+                <div class="menu-img-wrapper">
+                    <img src="/images/menu/pahala-rasagola.png" alt="Pahala Rasagola">
+                </div>
+                <div class="menu-info">
+                    <h3>Pahala Rasagola</h3>
+                    <p>Warm, melt-in-the-mouth cottage cheese balls in light sugar syrup.</p>
+                    <div class="card-footer">
+                        <span class="price">₹40</span>
+                        <span class="tag">Sweet</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card" data-category="desserts">
+                <div class="menu-img-wrapper">
+                    <img src="/images/menu/chhena-poda.png" alt="Chhena Poda">
+                </div>
+                <div class="menu-info">
+                    <h3>Chhena Poda</h3>
+                    <p>Baked cottage cheese dessert with a caramelized sugar crust.</p>
+                    <div class="card-footer">
+                        <span class="price">₹60</span>
+                        <span class="tag">Sweet</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card" data-category="desserts">
+                <div class="menu-img-wrapper">
+                    <img src="/images/menu/kheeri.png" alt="Kheeri">
+                </div>
+                <div class="menu-info">
+                    <h3>Kheeri</h3>
+                    <p>Traditional rice pudding flavored with cardamom and saffron.</p>
+                    <div class="card-footer">
+                        <span class="price">₹70</span>
+                        <span class="tag">Sweet</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY US -->
+    <section id="why-us">
+        <div class="why-grid">
+            <div class="why-item reveal">
+                <span class="icon">🥬</span>
+                <h4>Fresh Daily</h4>
+                <p>Ingredients sourced every morning from local farmers in Bhubaneswar.</p>
+            </div>
+            <div class="why-item reveal">
+                <span class="icon">📜</span>
+                <h4>Family Recipes</h4>
+                <p>Authentic methods passed down through three generations of chefs.</p>
+            </div>
+            <div class="why-item reveal">
+                <span class="icon">🍽️</span>
+                <h4>Dine-in & Takeaway</h4>
+                <p>Experience our warm hospitality or enjoy Aahar at home.</p>
+            </div>
+            <div class="why-item reveal">
+                <span class="icon">🚀</span>
+                <h4>Fast Delivery</h4>
+                <p>Hot, fresh meals delivered across the city within 45 minutes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials">
+        <div class="section-header reveal">
+            <h2>What our guests say</h2>
+        </div>
+        <div class="review-grid">
+            <div class="review-card reveal">
+                <span class="quote-mark">“</span>
+                <p class="review-text">The Dhenkanal Mutton transported me back to my childhood. Truly authentic flavors that you can't find elsewhere in the city.</p>
+                <span class="reviewer">— Rahul Patnaik</span>
+                <div class="stars">★★★★★</div>
+            </div>
+            <div class="review-card reveal">
+                <span class="quote-mark">“</span>
+                <p class="review-text">Aahar is our go-to for Sunday lunches. Their Dalma is the best I've ever had, perfectly balanced and soulful.</p>
+                <span class="reviewer">— Smita Mohanty</span>
+                <div class="stars">★★★★★</div>
+            </div>
+            <div class="review-card reveal">
+                <span class="quote-mark">“</span>
+                <p class="review-text">Impeccable service and a warm atmosphere. The saffron-themed interiors and the 3D art on the menu are a nice touch!</p>
+                <span class="reviewer">— Amit Sharma</span>
+                <div class="stars">★★★★★</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCATION -->
+    <section id="location">
+        <div class="location-info reveal">
+            <h2>Find Us</h2>
+            <div class="info-block">
+                <h4>Address</h4>
+                <p>12, Station Square Road, Bhubaneswar, Odisha 751001</p>
+            </div>
+            <div class="info-block">
+                <h4>Hours</h4>
+                <p>Mon–Fri: 11am – 10pm<br>Sat–Sun: 10am – 11pm</p>
+            </div>
+            <div class="info-block">
+                <h4>Contact</h4>
+                <p>+91 98765 43210<br>hello@aaharrestaurant.com</p>
+            </div>
+            <a href="https://goo.gl/maps/example" class="btn-outline" style="display: inline-block; margin-top: 1rem;">Get Directions</a>
+        </div>
+        <div class="map-wrapper reveal">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3742.946397330349!2d85.8392113149195!3d20.261271186411516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a190998a69e25d3%3A0x6739678853b0b754!2sStation%20Square%2C%20Bhubaneswar%2C%20Odisha!5e0!3m2!1sen!2sin!4v1651500000000!5m2!1sen!2sin" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <!-- RESERVATION -->
+    <section id="reservation">
+        <div class="reserve-container reveal">
+            <h2>Book Your Table</h2>
+            <form class="reserve-form" id="reserveForm" onsubmit="handleReserve(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Your Name" required class="hover-target">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" placeholder="+91" required class="hover-target">
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" required class="hover-target">
+                </div>
+                <div class="form-group">
+                    <label>Party Size</label>
+                    <select class="hover-target">
+                        <option>2 People</option>
+                        <option>4 People</option>
+                        <option>6 People</option>
+                        <option>8+ People</option>
+                    </select>
+                </div>
+                <div class="form-group full">
+                    <label>Message (Optional)</label>
+                    <textarea rows="4" placeholder="Allergies or special requests..." class="hover-target"></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Confirm Reservation</button>
+            </form>
+        </div>
+    </section>
+
+    <div id="toast">Thank you! Your table is reserved.</div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid reveal">
+            <div class="footer-logo">
+                <h3>Aahar</h3>
+                <p class="footer-tagline">Serving traditional Odia food since 2009. Family owned and operated in the heart of Bhubaneswar.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#menu" class="hover-target">Our Menu</a></li>
+                    <li><a href="#about" class="hover-target">Our Story</a></li>
+                    <li><a href="#reservation" class="hover-target">Book Table</a></li>
+                    <li><a href="#location" class="hover-target">Location</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Social</h4>
+                <ul class="footer-links">
+                    <li><a href="#" class="hover-target">Instagram</a></li>
+                    <li><a href="#" class="hover-target">Facebook</a></li>
+                    <li><a href="#" class="hover-target">Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Aahar. Bhubaneswar, Odisha.</p>
+            <p>Designed with Passion.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>
