@@ -122,14 +122,14 @@
         </div>
         
         <div class="tab-filters reveal">
-            <button class="tab-btn active" onclick="filterMenu('all')">All</button>
-            <button class="tab-btn" onclick="filterMenu('starters')">Starters</button>
-            <button class="tab-btn" onclick="filterMenu('mains')">Mains</button>
-            <button class="tab-btn" onclick="filterMenu('breads')">Breads</button>
-            <button class="tab-btn" onclick="filterMenu('desserts')">Desserts</button>
+            <button class="tab-btn active" data-category="all">All</button>
+            <button class="tab-btn" data-category="starters">Starters</button>
+            <button class="tab-btn" data-category="mains">Mains</button>
+            <button class="tab-btn" data-category="breads">Breads</button>
+            <button class="tab-btn" data-category="desserts">Desserts</button>
         </div>
 
-        <div class="menu-grid reveal" id="menu-grid">
+        <div class="menu-grid" id="menu-grid">
             <!-- Mains -->
             <div class="menu-card" data-category="mains">
                 <div class="menu-img-wrapper">
@@ -363,7 +363,7 @@
                 <h4>Contact</h4>
                 <p>+91 98765 43210<br>hello@aaharrestaurant.com</p>
             </div>
-            <a href="https://goo.gl/maps/example" class="btn-outline" style="display: inline-block; margin-top: 1rem;">Get Directions</a>
+            <a href="https://goo.gl/maps/example" class="btn-outline" target="_blank" rel="noopener noreferrer" style="display: inline-block; margin-top: 1rem;">Get Directions</a>
         </div>
         <div class="map-wrapper reveal">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3742.946397330349!2d85.8392113149195!3d20.261271186411516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a190998a69e25d3%3A0x6739678853b0b754!2sStation%20Square%2C%20Bhubaneswar%2C%20Odisha!5e0!3m2!1sen!2sin!4v1651500000000!5m2!1sen!2sin" loading="lazy"></iframe>
@@ -374,7 +374,7 @@
     <section id="reservation">
         <div class="reserve-container reveal">
             <h2>Book Your Table</h2>
-            <form class="reserve-form" id="reserveForm" onsubmit="handleReserve(event)">
+            <form class="reserve-form" id="reserveForm">
                 <div class="form-group">
                     <label>Full Name</label>
                     <input type="text" placeholder="Your Name" required class="hover-target">

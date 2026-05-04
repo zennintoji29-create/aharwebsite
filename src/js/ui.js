@@ -81,7 +81,7 @@ const revealObserver = new IntersectionObserver((entries) => {
             }
         }
     });
-}, { threshold: 0.25 });
+}, { threshold: 0.05 });
 
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
@@ -107,32 +107,69 @@ function animateNumbers(parent) {
 }
 
 // Menu Filtering
-window.filterMenu = function(category) {
+const filterMenu = (category, btnEl = null) => {
     const cards = document.querySelectorAll('.menu-card');
     const btns = document.querySelectorAll('.tab-btn');
     
     btns.forEach(btn => btn.classList.remove('active'));
-    if (window.event && window.event.target) {
-        window.event.target.classList.add('active');
+    if (btnEl) {
+        btnEl.classList.add('active');
+    } else {
+        // Fallback to finding the button matching category
+        const targetBtn = Array.from(btns).find(btn => 
+            btn.getAttribute('data-category') === category
+        );
+        if (targetBtn) targetBtn.classList.add('active');
     }
 
     cards.forEach(card => {
         if (category === 'all' || card.getAttribute('data-category') === category) {
-            card.style.display = 'block';
-            setTimeout(() => {
-                card.style.opacity = '1';
-                card.style.transform = 'scale(1)';
-            }, 50);
+            card.style.display = 'flex';
+            // Use requestAnimationFrame to ensure display: flex is applied before opacity
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'scale(1)';
+                }, 10);
+            });
         } else {
             card.style.opacity = '0';
             card.style.transform = 'scale(0.96)';
             setTimeout(() => card.style.display = 'none', 400);
         }
     });
+};
+
+// Initialization function
+const init = () => {
+    // Menu tab listeners
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const category = btn.getAttribute('data-category') || 'all';
+            filterMenu(category, btn);
+        });
+    });
+
+    // Initial filter
+    filterMenu('all');
+
+    // Reservation form
+    const reserveForm = document.getElementById('reserveForm');
+    if (reserveForm) {
+        reserveForm.addEventListener('submit', handleReserve);
+    }
+};
+
+// Run init when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
 }
 
 // Reservation Form
-window.handleReserve = function(e) {
+const handleReserve = (e) => {
     e.preventDefault();
     const form = e.target;
     const toast = document.getElementById('toast');

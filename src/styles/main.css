@@ -500,15 +500,18 @@
         }
 
         .menu-card {
-            background: var(--charcoal-light);
+            background: rgba(45, 32, 16, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
             gap: 2rem;
             padding: 2.5rem;
             position: relative;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
             overflow: hidden;
-            border: 1px solid rgba(250, 243, 224, 0.05);
+            border: 1px solid rgba(250, 243, 224, 0.08);
+            border-radius: 12px;
         }
 
         .menu-img-wrapper {
@@ -583,6 +586,12 @@
 
         .menu-card:hover::after {
             opacity: 1;
+        }
+
+        .menu-card:hover {
+            border-color: rgba(232, 130, 12, 0.3);
+            transform: translateY(-5px) scale(1.01) !important;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
         .menu-card:hover .price {
@@ -864,7 +873,7 @@
 
         /* STAGGERED REVEAL */
         .reveal.active > * {
-            animation: fadeInUp 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation: fadeInUp 1.2s cubic-bezier(0.25, 1, 0.5, 1) both;
         }
 
         @keyframes fadeInUp {
